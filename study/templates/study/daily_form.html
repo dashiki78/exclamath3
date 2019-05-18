@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>느낌표수학</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+      body {
+        margin: 5px;
+      }
+      a {
+        margin: 10px;
+      }
+      input {
+        margin: 10px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <h1>느낌표수학학습일지입력</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <h3>{{ name }}</h3>
+        <span>의 <b>{{ date }}</b> 학습입력</span>
+      </div>
+      <a href="{% url 'study:first_page' %}" class="btn btn-warning">처음화면으로</a>
+      <div class="row">
+        <div class="col-sm-9">
+          <table class="table">
+            <form class="" action="" method="post">
+              {% csrf_token %}
+              {{ form.as_table }}
+              <input type="submit" name="" value="학습일지저장" class="btn btn-primary">
+            </form>
+          </table>
+        </div>
+        <div class="col-sm-3">
+          학습내용과정
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>느낌표수학</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+      h1 {
+        margin:10px;
+      }
+      a {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>학습일지 리스트</h1>
+        <div class="col-sm-5">
+          <a href="{% url 'study:first_page' %}" class="btn btn-primary">처음화면으로</a>
+        </div>
+      </div>
+      <table class="table">
+        <tr>
+          <th scope="col">학생이름</th>
+          <th scope="col">학습날짜</th>
+        </tr>
+        {% for note in daily_list %}
+          <tr>
+            <th><a href="{% url 'study:daily_detail' note.id %}">{{note.name}}</a></th>
+            <th>{{note.study_day}}</th>
+          </tr>
+
+
+        <!-- <li>{{note.name}}</li>
+          <li>{{note.study_day}}</li>
+          <li>{{note.come_status}}</li>
+          <li>{{note.homework_complete}}</li>
+          <li>{{note.homework_status}}</li>
+          <li>{{note.contents}}</li>
+          <li>{{note.test1}}</li>
+          <li>{{note.test1_content}}</li>
+          <li>{{note.test2}}</li>
+          <li>{{note.test2_content}}</li>
+          <li>{{note.test3}}</li>
+          <li>{{note.test3_content}}</li>
+          <li>{{note.note}}</li> -->
+          {% endfor %}
+
+      </table>
+
+    </div>
+
+  </body>
+</html>

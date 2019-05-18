@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>느낌표수학</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+      .list-group-item {
+        background-color: Azure;
+        text-align: center;
+      }
+
+      input {
+        margin: 8px;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" class="font-weight-bolder"><h1>느낌표수학 학습관리 SYSTEM</h1></div>
+        <div class="col-sm-3" id="today"></div>
+      </div>    </div>
+   <br>
+
+   <div class="container">
+     <ul class="nav nav-tabs nav-justified">
+      <li class="nav-item">
+        <a class="nav-link active full_list" href="#">전체</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mon" href="#">월</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link tue" href="#">화</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link wed" href="#">수</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link thr" href="#">목</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link fri" href="#">금</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link sat" href="#">토</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link sun" href="#">일</a>
+      </li>
+    </ul>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-2">
+      </div>
+      <div id="student_list" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_mon" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "월" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_tue" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "화" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_wed" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "수" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_thr" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "목" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_fri" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "금" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_sat" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "토" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="student_list_sun" class="col-sm-2">
+        <ul class="list-group">
+          {% for student in students %}
+          {% if "일" in student.come_day %}
+          <li class="list-group-item list-group-item-action">{{student.name}}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+        <div class="col-sm-3">
+          <input type="text" name="select_name" value="" class="form-control" id="nameInput">
+          학습일자 :
+          <input type="date" name="" value="" id="studyday">
+          조회시작 :
+          <input type="date" name="" value="" id="startday">
+          ~
+          <input type="date" name="" value="" id="endday">
+        </div>
+        <div>
+          <a href="dailynew/" class="btn btn-primary" id="daily_new_input">학습일지입력</a>
+          <a href="list/" class="btn btn-primary" id="daily_list">학습일지조회</a>
+          <button type="button" name="button" class="btn btn-warning">리포트생성</button>
+
+        </div>
+    </div>
+
+   </div>
+
+  </body>
+
+  <script>
+      $(document).ready(function(){
+        $("#student_list_mon").hide();
+        $("#student_list_tue").hide();
+        $("#student_list_wed").hide();
+        $("#student_list_thr").hide();
+        $("#student_list_fri").hide();
+        $("#student_list_sat").hide();
+        $("#student_list_sun").hide();
+
+        $(".full_list").click(function(){
+          $("#student_list").show();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".mon").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").show();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".tue").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").show();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".wed").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").show();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".thr").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").show();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".fri").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").show();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").hide();
+        });
+
+        $(".sat").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").show();
+          $("#student_list_sun").hide();
+        });
+
+        $(".sun").click(function(){
+          $("#student_list").hide();
+          $("#student_list_mon").hide();
+          $("#student_list_tue").hide();
+          $("#student_list_wed").hide();
+          $("#student_list_thr").hide();
+          $("#student_list_fri").hide();
+          $("#student_list_sat").hide();
+          $("#student_list_sun").show();
+        });
+
+        $(".list-group-item").click(function(){
+          $("#nameInput").val(this.textContent);
+        })
+
+        $("#daily_new_input").click(function() {
+          var value = $("#daily_new_input").attr("href");
+          var date = $("#studyday").val();
+          var name = $("#nameInput").val();
+          $("#daily_new_input").attr('href', value + name + '/' + date);
+        });
+
+        $("#daily_list").click(function() {
+          var name = $("#nameInput").val();
+          var value = $("#daily_list").attr("href");
+          var startday = $("#startday").val();
+          var endday = $("#endday").val();
+          $("#daily_list").attr('href', value + "?name=" + name + "&startday=" + startday + "&endday=" + endday);
+        })
+
+        var d = new Date().toISOString().slice(0,10);
+
+        document.getElementById("today").innerHTML = d;
+
+        $("#studyday").val(d);
+        $("#endday").val(d);
+
+        var dd = new Date()
+        var monthOfYear = dd.getMonth();
+        dd.setMonth(monthOfYear - 1);
+        var dd = dd.toISOString().slice(0,10);
+        $("#startday").val(dd);
+
+    });
+
+  </script>
+</html>

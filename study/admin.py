@@ -9,7 +9,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    pass
+    list_display=('level', 'middle_unit', 'small_unit', 'index',)
 
 
 @admin.register(DailyNote)

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <style>
+    .name {
+      margin : 20px;
+    }
+
+    #s_name {
+      font-size : 30px;
+    }
+  </style>
+  <body>
+
+   <div class="container">
+     <div class="row name">
+       <div class="col-sm-7" id="s_name">
+         <b>{{detail.name}}</b> 의 <b>{{detail.study_day}}</b>  학습일지
+       </div>
+      <div class="col-sm-5">
+        <a href="{% url 'study:first_page' %}" class="btn btn-primary">처음화면으로</a>
+        <button type="button" name="button" class="btn btn-primary" onclick="location.href='{% url 'study:daily_update' detail.id detail.name detail.study_day %}'">수정</button>
+        <a href="{% url 'study:daily_delete' detail.id %}" onclick="return confirm('정말 삭제하시겠습니까?')" class="btn btn-danger">삭제</a>
+      </div>
+     </div>
+
+     <ul class="list-group">
+       <li class="list-group-item">
+         <label for="">출결 : </label>
+         {{detail.come_status}}
+       </li>
+       <li class="list-group-item">
+         <label for="">과제여부 : </label>
+         {{detail.homework_complete}}
+       </li>
+       <li class="list-group-item">
+         <label for="">과제상태 : </label>
+         {{detail.homework_status}}
+       </li>
+       <li class="list-group-item">
+         <label for="">학습내용 : </label>
+         {{detail.contents}}
+       </li>
+       <li class="list-group-item">
+         <label for="">비고 : </label>
+         {{detail.note}}
+       </li>
+       <li class="list-group-item">
+         <label for="">소단원테스트점수 : </label>
+         {{detail.test1}}점
+       </li>
+       <li class="list-group-item">
+         <label for="">소단원테스트내용 : </label>
+         {{detail.test1_content}}
+       </li>
+       <li class="list-group-item">
+         <label for="">중단원테스트점수 : </label>
+         {{detail.test2}}점
+       </li>
+       <li class="list-group-item">
+         <label for="">중단원테스트내용 : </label>
+         {{detail.test2_content}}
+       </li>
+       <li class="list-group-item">
+         <label for="">대단원테스트점수 : </label>
+         {{detail.test2}}점
+       </li>
+       <li class="list-group-item">
+         <label for="">대단원테스트내용 : </label>
+         {{detail.test2_content}}
+       </li>
+     </ul>
+
+   </div>
+  </body>
+
+</html>
