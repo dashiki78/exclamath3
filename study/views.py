@@ -1,10 +1,24 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Student, DailyNote
+from .models import Student, DailyNote, Course
 from .forms import DailyNoteForm
 from datetime import datetime
+from django.http import HttpResponse, JsonResponse
+from .serializers import CourseSerializer
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+
 
 
 # Create your views here.
+@csrf_exempt
+def course_list(request, level):
+    if request.method == 'GET':
+        print(level)
+        course = Course.objects.filter(level = level).order_by('index')
+        serializer = CourseSerializer(course, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
 def first_page(request):
     students = Student.objects.filter(status = True)
 

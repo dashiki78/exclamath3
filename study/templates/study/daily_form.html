@@ -19,6 +19,9 @@
       input {
         margin: 10px;
       }
+      li {
+        margin: 5px;
+      }
     </style>
 
   </head>
@@ -48,12 +51,77 @@
         </div>
         <div class="col-sm-3">
           학습내용과정
+          <div>
+            <select class="level-choose" name="">
+              <option value="초4-1">초4-1</option>
+              <option value="초4-2">초4-2</option>
+              <option value="초5-1">초5-1</option>
+              <option value="초5-2">초5-2</option>
+              <option value="초6-1">초6-1</option>
+              <option value="초6-2">초6-2</option>
+              <option value="중1-1">중1-1</option>
+              <option value="중1-2">중1-2</option>
+              <option value="중2-1">중2-1</option>
+              <option value="중2-2">중2-2</option>
+              <option value="중3-1">중3-1</option>
+              <option value="중3-2">중3-2</option>
+            </select>
+          </div>
+          <ul class="level-list">
 
+          </ul>
         </div>
-
       </div>
-
     </div>
-
   </body>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var levelChoose = document.querySelector(".level-choose");
+    var levelUl = document.querySelector(".level-list");
+
+
+    levelChoose.onchange = function(){
+      var level = levelChoose.options[levelChoose.selectedIndex].text;
+      getLevel(level);
+    };
+
+    function getLevel(level) {
+      console.log("test");
+      $.ajax({
+        url : "/study/course/" + level,
+        type : "GET",
+        dataType : "json"
+      })
+      .done(function(json){
+        insertLevel(json);
+      })
+      .fail(function(xhr, status, errorThrown){
+        console.log("json요청실패");
+      })
+      .always(function(xhr, status) {
+
+      });
+    }
+
+    function insertLevel(json) {
+      var child = levelUl.lastElementChild;
+      while (child) {
+        levelUl.removeChild(child);
+        child = levelUl.lastElementChild;
+      }
+      for(var i = 0; i < json.length; i++) {
+        var node = document.createElement("LI");
+        node.append(json[i].small_unit);
+        node.onclick = function() {
+          console.log(this.textContent);
+          var contentsArea = document.querySelector("#id_contents");
+          contentsArea.value += this.textContent + "\n";
+        }
+        levelUl.append(node);
+      }
+    }
+
+  });
+
+  </script>
 </html>
